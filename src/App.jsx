@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path='/login' element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
