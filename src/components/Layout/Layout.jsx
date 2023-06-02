@@ -1,13 +1,16 @@
+import Content from '../Dashboard/Content'
 import LeftSidebar from '../Dashboard/LeftSidebar'
+import RightSidebar from '../Dashboard/RightSidebar'
 import Navbar from './Navbar'
 
 const Layout = () => {
   return (
     <>
     <Navbar/>
-    <div className="">
-      <h1>hello</h1>
+    <div className="flex justify-between">    
         <LeftSidebar/>
+        <Content/>
+        <RightSidebar/>
     </div>
     </>
   )
