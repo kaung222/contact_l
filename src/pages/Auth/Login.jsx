@@ -25,7 +25,7 @@ const Login = () => {
     <div className="flex  justify-center items-center h-screen">
       <form onSubmit={submitHandler} className="flex flex-col gap-5 w-96 shadow-md border p-7 rounded">
         <h3 className=" font-bold mx-auto font text-3xl text-blue-500">
-          Login Hi Hi
+          Login
         </h3>
         <div className="flex flex-col gap-3 mt-3">
           <label htmlFor="username">Username</label>
