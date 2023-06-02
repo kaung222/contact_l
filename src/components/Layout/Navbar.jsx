@@ -1,3 +1,4 @@
+import {BsSearch} from 'react-icons/bs'
 const Navbar = () => {
   return (
     <>
@@ -8,11 +9,13 @@ const Navbar = () => {
           <p>Name</p>
         </div>
         <div className=" bg-slate-50 rounded active:shadow-lg flex items-center justify-center shadow-slate-700 px-4 py-1">
-          <button className="text-slate-700">Icon</button>
+          <button className="text-slate-700">
+            <BsSearch/>
+          </button>
           <input
             type="text"
             name="search"
-            className=" outline-none px-3 py-1 md:w-[400px] w-full bg-slate-50 "
+            className=" outline-none px-3 py-1 md:w-[400px] text-slate-800 w-full bg-slate-50 "
             placeholder=" search"
           />
           
