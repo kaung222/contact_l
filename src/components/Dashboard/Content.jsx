@@ -1,5 +1,5 @@
 const Content = () => {
-  return <div>knkk test again</div>;
+  return <div>amo test again</div>;
 };
 
 export default Content;
