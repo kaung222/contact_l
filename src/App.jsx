@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 const App = () => {
   return (
     <>
+      <h1>san kyi tar par</h1>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
