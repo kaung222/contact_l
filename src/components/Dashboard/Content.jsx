@@ -1,8 +1,10 @@
-
 const Content = () => {
   return (
-    <div>Content</div>
-  )
-}
+    <div>
+      <p>hello</p>
+      <p>amo test</p>
+    </div>
+  );
+};
 
 export default Content
