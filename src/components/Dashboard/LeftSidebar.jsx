@@ -24,7 +24,7 @@ const LeftSidebar = () => {
                     <li className=' text-xl hover:bg-stone-300 p-2 rounded-md' >
                         <div className=" flex gap-5 items-center">
                             <RxCounterClockwiseClock />
-                            <h1>Frequent</h1>
+                            <h1>Other Contacts</h1>
                         </div>
                     </li>
                 </NavLink>
