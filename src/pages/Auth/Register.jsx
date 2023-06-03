@@ -1,20 +1,16 @@
-import  { useState } from "react";
+import { useState } from "react";
 import loginIamge from "../../assets/login.jpg";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   AiOutlineMail,
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
-// import { useRegisterMutation } from "../features/api/AuthApi";
-// import { useDispatch } from "react-redux";
-// import { useRegisterMutation } from "../features/api/AuthApi";
-// import { addUser } from "../features/services/AuthSlice";
-
+import { useUserRegisterMutation } from "../../features/api/AuthApi";
 const Register = () => {
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
-  // const [register] = useRegisterMutation();
+  const [userRegister] = useUserRegisterMutation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,8 +19,8 @@ const Register = () => {
 
   const user = { name, email, password, password_confirmation };
   const registerHandler = async (user) => {
-    // const { data } = await register(user);
-    console.log(user);
+    const data = await userRegister(user);
+    console.log(data);
     // if (data?.success) {
     //   console.log("register successfully!");
     //   dispatch(addUser({ user: data?.user, token: data?.token }));

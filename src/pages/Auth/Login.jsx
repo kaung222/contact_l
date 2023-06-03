@@ -6,8 +6,10 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
+import { useUserLoginMutation } from "../../features/api/AuthApi";
 
 const Login = () => {
+  const [userLogin] = useUserLoginMutation();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,15 +17,13 @@ const Login = () => {
 
   const user = { email, password };
   const loginHandler = async (user) => {
-    // const response = await login(user);
-    console.log(user);
-    // if (response?.data?.success) {
-    //   dispatch(addUser({ user: response?.data?.user, token: response?.data?.token }));
-    //   console.log("login successfully!");
-    navigate("/");
-    // } else {
-    //   swal(response.error.data.message);
-    // }
+    const { data } = await userLogin(user);
+    console.log(data)
+    if (data?.success) {
+      localStorage.setItem("token", JSON.stringify(data?.token));
+      localStorage.setItem("user", JSON.stringify(data?.user));
+      navigate("/");
+    }
   };
   return (
     <div>
