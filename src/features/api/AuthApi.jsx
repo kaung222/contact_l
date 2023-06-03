@@ -10,7 +10,7 @@ export const AuthApi = createApi({
     // login
     userLogin: builder.mutation({
       query: (user) => ({
-        url: "login",
+        url: "/login",
         method: "POST",
         body: user,
       }),
@@ -38,4 +38,5 @@ export const AuthApi = createApi({
   }),
 });
 
-export const { useUserLoginMutation, useUserRegisterMutation ,useUserLogoutMutation } = AuthApi;
+// eslint-disable-next-line react-refresh/only-export-components
+export const {useUserLoginMutation, useUserRegisterMutation, useUserLogoutMutation} = AuthApi

@@ -13,7 +13,16 @@ export const ContactApi = createApi({
         body: contact,
         headers: { authorization: ` Bearer ${token}` },
       }),
-      invalidatesTags : ['contact_api']
+      invalidatesTags: ["contact_api"],
+    }),
+    getContact: builder.query({
+      query: (token) => ({
+        url: "contact",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ['contact_api']
     }),
   }),
 });
+
+export const {useGetContactQuery} = ContactApi;
