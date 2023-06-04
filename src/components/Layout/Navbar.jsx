@@ -7,13 +7,10 @@ const Navbar = () => {
   console.log(showProfile);
   return (
     <>
-      <div className=" px-2 flex w-full justify-between items-center gap-4 text-sm md:text-base  md:px-5 shadow-lg">
-        <div className="flex items-center justify-center gap-2 md:gap-5 my-3 md:my-5">
-          <button
-            className="menu text-md md:text-2xl dark:bg-slate-500"
-            onClick={() => document.documentElement.classList.add('dark')}
-          >
-            <FcMenu />
+      <div className=" flex w-full justify-between items-center gap-4 text-sm md:text-base  px-5 shadow-lg sticky top-0 z-10 bg-white">
+        <div className="flex items-center justify-center gap-2 md:gap-5 my-5">
+          <button className="menu text-2xl">
+            <FcMenu/>
           </button>
           <div className="hidden md:flex">
             <img

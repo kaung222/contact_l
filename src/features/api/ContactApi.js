@@ -1,11 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const ContactApi = createApi({
-  reducerPath: "contact_api",
+  reducerPath: "contact",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://contact-app.mmsdev.site/api/v1",
   }),
-  tagTypes: ["contact_api"],
+  tagTypes: ["contact"],
   endpoints: (builder) => ({
+    getContact: builder.query({
+      query: (token) => ({
+        url: "/contact",
+        headers: { authorization: `Bearer ${token}` },
+        // body: user,
+      }),
+      providesTags: ["contact"],
+    }),
     createContact: builder.mutation({
       query: ({ contact, token }) => ({
         url: "contact",
@@ -13,16 +21,9 @@ export const ContactApi = createApi({
         body: contact,
         headers: { authorization: ` Bearer ${token}` },
       }),
-      invalidatesTags: ["contact_api"],
-    }),
-    getContact: builder.query({
-      query: (token) => ({
-        url: "contact",
-        headers: { authorization: `Bearer ${token}` },
-      }),
-      providesTags: ['contact_api']
+      invalidatesTags: ["contact"],
     }),
   }),
 });
 
-export const {useGetContactQuery} = ContactApi;
+export const {useCreateContactMutation ,useGetContactQuery} = ContactApi;
