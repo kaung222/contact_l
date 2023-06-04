@@ -4,8 +4,8 @@ import { ContactApi } from "../api/ContactApi";
 
 export const store = configureStore({
   reducer: {
-    [AuthApi]: AuthApi.reducer,
-    [ContactApi]: ContactApi.reducer,
+    [AuthApi.reducerPath]: AuthApi.reducer,
+    [ContactApi.reducerPath]: ContactApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(AuthApi.middleware,ContactApi.middleware),

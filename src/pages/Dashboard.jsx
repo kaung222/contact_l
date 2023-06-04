@@ -1,4 +1,5 @@
-import Content from "../components/Dashboard/Content";
+// import Content from "../components/Dashboard/Content";
+import Contentcopy from "../components/Dashboard/Contentcopy";
 import LeftSidebar from "../components/Dashboard/LeftSidebar";
 import Navbar from "../components/Layout/Navbar";
 
@@ -8,7 +9,8 @@ const Dashboard = () => {
       <Navbar />
       <div className="flex w-full">
         <LeftSidebar />
-         <Content/>
+         {/* <Content/> */}
+         <Contentcopy/>
       </div>
     </>
   );

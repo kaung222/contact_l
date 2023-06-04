@@ -1,8 +1,23 @@
 import { useState } from "react";
 import { BsGear, BsSearch } from "react-icons/bs";
 import { FcMenu } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FiLogOut, FiUserPlus } from "react-icons/fi";
+import { useUserLogoutMutation } from "../../features/api/AuthApi";
 const Navbar = () => {
+  const [userLogout] = useUserLogoutMutation();
+  const navigate = useNavigate();
+  const token = JSON.parse(localStorage.getItem("token"));
+  const logoutHandler = async (token) => {
+    const response = await userLogout(token);
+    if (response?.data?.success) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/login");
+    } else {
+      console.log(response.error.data);
+    }
+  };
   const [showProfile, setShowProfile] = useState(false);
   console.log(showProfile);
   return (
@@ -10,8 +25,8 @@ const Navbar = () => {
       <div className=" px-2 flex w-full justify-between items-center gap-4 text-sm md:text-base  md:px-5 shadow-lg">
         <div className="flex items-center justify-center gap-2 md:gap-5 my-3 md:my-5">
           <button
-            className="menu text-md md:text-2xl dark:bg-slate-500"
-            onClick={() => document.documentElement.classList.add('dark')}
+            className="menu text-md md:text-2xl"
+            // onClick={() => document.documentElement.classList.add("dark")}
           >
             <FcMenu />
           </button>
@@ -52,9 +67,28 @@ const Navbar = () => {
             />
           </button>
           {showProfile && (
-            <div className=" p-3 absolute items-start w-52 top-[40px] md:top-[50px] rounded-xl flex flex-col shadow-2xl shadow-black right-0 bg-slate-50">
-              <Link className="p-2">Profile</Link>
-              <Link className="p-2">Logout</Link>
+            <div className=" p-3 md:p-8 font-semibold md:w-[300px] lg:w-[300px] w-auto text-sm absolute items-start top-[40px] md:top-[50px] right-3 rounded-2xl flex flex-col shadow-2xl shadow-black bg-slate-50">
+              <div className="flex gap-3 items-center justify-start">
+                <span className=" bg-slate-500 text-white w-10 h-10 text-center py-2 rounded-full">
+                  J
+                </span>
+                <div className="">
+                  <p>James</p>
+                  <p>James@gmail.com</p>
+                </div>
+              </div>
+
+              <Link className="p-2 hover:bg-slate-300 flex items-center gap-2 rounded-lg w-full mt-5">
+                <FiUserPlus />
+                <span>Add Another Account</span>
+              </Link>
+              <p
+                className="p-2 flex items-center gap-2 hover:bg-slate-300 rounded-lg w-full"
+                onClick={() => logoutHandler(token)}
+              >
+                <FiLogOut />
+                <span>Logout</span>
+              </p>
             </div>
           )}
         </div>

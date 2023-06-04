@@ -7,22 +7,33 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { useUserLoginMutation } from "../../features/api/AuthApi";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [userLogin] = useUserLoginMutation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("admin123");
   const [hidePassword, setHidePassword] = useState(true);
 
   const user = { email, password };
   const loginHandler = async (user) => {
     const { data } = await userLogin(user);
-    console.log(data)
     if (data?.success) {
       localStorage.setItem("token", JSON.stringify(data?.token));
       localStorage.setItem("user", JSON.stringify(data?.user));
       navigate("/");
+    } else {
+      toast.error("Something went wrong!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   return (
@@ -121,6 +132,21 @@ const Login = () => {
         </div>
 
         {/* right side end  */}
+        {/* React Toast  */}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        {/* Same as */}
+        <ToastContainer />
       </div>
     </div>
   );
