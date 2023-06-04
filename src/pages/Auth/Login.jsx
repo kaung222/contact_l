@@ -7,27 +7,63 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { useUserLoginMutation } from "../../features/api/AuthApi";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../features/services/AuthSlice";
+import { useForm } from "@mantine/form";
+import { PasswordInput, TextInput } from "@mantine/core";
 
 const Login = () => {
   const [userLogin] = useUserLoginMutation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+  const dispatch = useDispatch();
+  
 
-  const user = { email, password };
-  const loginHandler = async (user) => {
-    const { data } = await userLogin(user);
-    console.log(data)
-    if (data?.success) {
-      localStorage.setItem("token", JSON.stringify(data?.token));
-      localStorage.setItem("user", JSON.stringify(data?.user));
-      navigate("/");
-    }
-  };
+  const form = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) =>
+        value.length < 8 ? "Password must have at least 8 characters" : null,
+    },
+  });
+
+
+  // const user = { email, password };
+  // const loginHandler = async (user) => {
+  //   const { data } = await userLogin(user);
+  //   dispatch(addUser({user: data?.user, token: data?.token}))
+  //   console.log(data)
+  //   if (data?.success) {
+  //     // localStorage.setItem("token", JSON.stringify(data?.token));
+  //     // localStorage.setItem("user", JSON.stringify(data?.user));
+  //     navigate("/");
+  //   }
+  // };
   return (
     <div>
-      <div className="flex items-center justify-center gap-10 bg-white h-screen md:p-5 md:px-10 w-full">
+      <form
+        onSubmit={form.onSubmit(async (values) => {
+          const { data } = await userLogin(values);
+          dispatch(addUser({ user: data?.user, token: data?.token }));
+          console.log(data);
+          if (data?.success) {
+            navigate("/");
+          }
+          //   try {
+
+          //   } catch (error) {
+          //     console.log(error);
+          //   }
+        })}
+        className="flex items-center justify-center gap-10 bg-white h-screen md:p-5 md:px-10 w-full"
+      >
         {/* left side start  */}
         <div className=" w-full md:w-1/2 md:p-5 rounded-lg h-full bg-[#f3f5f9]">
           <div className=" md:px-10 px-5">
@@ -46,13 +82,9 @@ const Login = () => {
                   Email
                 </label>
                 <br />
-                <input
-                  value={email}
-                  autoFocus
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  placeholder="example@gmail.com"
-                  className=" border-none bg-white  w-full my-2 focus:outline-blue-700 py-2 px-3 rounded-lg"
+                <TextInput
+                  placeholder="Enter your email..."
+                  {...form.getInputProps("email")}
                 />
               </div>
               <div className=" mt-2">
@@ -71,12 +103,9 @@ const Login = () => {
                   )}
                 </div>
 
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type={hidePassword ? "password" : "text"}
-                  placeholder="****"
-                  className=" border-none bg-white  w-full my-2 focus:outline-blue-700 py-2 px-3 rounded-lg"
+                <PasswordInput
+                  placeholder="Enter your password..."
+                  {...form.getInputProps("password")}
                 />
                 <span className=" text-end w-full text-sm text-[#3c37ff] hover:underline cursor-pointer">
                   Recover Password
@@ -84,7 +113,8 @@ const Login = () => {
               </div>
               <button
                 className="border-none  w-full my-5 bg-[#3c37ff] text-slate-300 focus:outline-blue-700 py-2 px-3 rounded-lg"
-                onClick={() => loginHandler(user)}
+                // onClick={(user) => loginHandler(user)}
+                type="submit"
               >
                 Login
               </button>
@@ -105,7 +135,6 @@ const Login = () => {
                 <span>
                   Need help or suggest anything{" "}
                   <Link to="/" className="text-[#3c37ff] hover:underline ">
-                    {" "}
                     here
                   </Link>
                 </span>
@@ -121,7 +150,7 @@ const Login = () => {
         </div>
 
         {/* right side end  */}
-      </div>
+      </form>
     </div>
   );
 };

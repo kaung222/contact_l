@@ -6,6 +6,7 @@ import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import Guard from "./components/Guard";
 import Frequent from "./pages/Frequent";
+import Content from "./components/Dashboard/Content";
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
             </Guard>
           }
         />
-          <Route
+        <Route
           path="/frequent"
           element={
             <Guard>
@@ -29,6 +30,7 @@ const App = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Content />} />
       </Routes>
     </>
   );

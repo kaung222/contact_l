@@ -5,8 +5,8 @@ import ContactSlice from "../services/ContactSlice";
 
 export const store = configureStore({
   reducer: {
-    [AuthApi]: AuthApi.reducer,
-    [ContactApi]: ContactApi.reducer,
+    [AuthApi.reducerPath]: AuthApi.reducer,
+    [ContactApi.reducerPath]: ContactApi.reducer,
     ContactSlice: ContactSlice
   },
   middleware: (getDefaultMiddleware) =>
