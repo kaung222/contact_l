@@ -1,56 +1,56 @@
-import { AiFillPrinter } from "react-icons/ai";
-import { BiDotsVerticalRounded, BiExport, BiImport } from "react-icons/bi";
-import { useGetContactsQuery } from "../../features/api/ContactApi";
-import Table from "./Table";
+import { Table } from "@mantine/core";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useGetContactQuery } from "../../features/api/ContactApi";
+import { addContacts } from "../../features/services/ContactSlice";
 
 const Content = () => {
   const token = JSON.parse(localStorage.getItem("token"));
-  const response = useGetContactsQuery(token);
-  const contacts = response?.data?.contacts.data;
+  const { data } = useGetContactQuery(token);
+  console.log(data?.contacts.data);
+  const contacts = useSelector((state) => state.ContactSlice.contacts);
+  const dispatch = useDispatch();
   console.log(contacts);
+  useEffect(() => {
+    dispatch(addContacts(data?.contacts.data));
+  }, [data, dispatch]);
 
-  // const checkedItem =
   return (
     <>
-      <div className="w-full">
-        <table className="table w-full mx-2 md:mx-5 mt-5">
-          <thead className=" text-slate-500">
-            <tr className=" border-b-[1px] border-slate-200 ">
-              <th className="py-4">Name</th>
-              <th className=" ">Email</th>
-              <th className=" ">Phone No.</th>
-              <th>
-                <button className="px-2 md:px-3 text-lg">
-                  <AiFillPrinter />
-                </button>
-                <button className="px-2 md:px-3 text-lg">
-                  <BiExport />
-                </button>
-                <button className="px-2 md:px-3 text-lg">
-                  <BiImport />
-                </button>
-                <button className="px-2 md:px-3 text-lg">
-                  <BiDotsVerticalRounded />
-                </button>
-              </th>
+      <div className="w-full ml-[280px]">
+        <Table horizontalSpacing="xl">
+          <thead className="fixed w-[1180px]">
+            <tr className=" flex justify-around items-center  py-4 px-1 text-center bg-white ">
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Job</th>
             </tr>
           </thead>
-          {contacts?.length < 1 ? (
-            <div className="">
-              <p className="text-center">No Contact </p>
-              <button className=" btn-primary">Create new</button>
-            </div>
-          ) : (
-            <tbody>
-              {contacts?.map((contact) => {
-                return <Table contact={contact} contacts={contacts} key={contact.id}/>;
-              })}
-            </tbody>
-          )}
-        </table>
+          <tbody className="">
+            {contacts?.map((contact,index) => {
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <Link to={`/detail/${contact?.id}`} state={contact}>
+                  <tr
+                    key={contact?.id}
+                    className={`flex justify-around items-center border py-8 ${index === 0 && "mt-10"} shadow hover:bg-slate-100`}
+                  >
+                    <td>{contact?.name}</td>
+                    <td colSpan={2}>{contact?.email}</td>
+                    <td>{contact?.phone}</td>
+                    <td>{contact?.address.substring(0, 10)}...</td>
+                  </tr>
+                 </Link>
+              );
+            })}
+          </tbody>
+        </Table>
       </div>
     </>
   );
 };
 
 export default Content;
+ 

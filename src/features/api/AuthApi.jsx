@@ -1,40 +1,41 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const AuthApi = createApi({
-  reducerPath: "auth_api",
+  reducerPath: "auth",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://contact-app.mmsdev.site/api/v1",
   }),
-  tagTypes: ["auth_api"],
+  tagTypes: ["auth"],
   endpoints: (builder) => ({
     // login
     userLogin: builder.mutation({
       query: (user) => ({
-        url: "login",
+        url: "/login",
         method: "POST",
         body: user,
       }),
-      invalidatesTags: ["auth_api"],
+      invalidatesTags: ["auth"],
     }),
     // register
     userRegister: builder.mutation({
       query: (user) => ({
-        url: "register",
+        url: "/register",
         method: "POST",
         body: user,
       }),
-      invalidatesTags: ["auth_api"],
+      invalidatesTags: ["auth"],
     }),
     //   userLogout
     userLogout: builder.mutation({
-      query: (token) => ({
-        url: "user-logout",
+      query: ( token ) => ({
+        url: "/login",
         method: "POST",
         headers: { authorization: ` Bearer ${token}` },
       }),
-      invalidatesTags: ["auth_api"],
+      invalidatesTags: ["auth"],
     }),
   }),
 });
 
-export const { useUserLoginMutation, useUserRegisterMutation ,useUserLogoutMutation } = AuthApi;
+// eslint-disable-next-line react-refresh/only-export-components
+export const {useUserLoginMutation, useUserRegisterMutation, useUserLogoutMutation} = AuthApi
