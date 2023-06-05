@@ -4,6 +4,8 @@ import { FcMenu } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogOut, FiUserPlus } from "react-icons/fi";
 import { useUserLogoutMutation } from "../../features/api/AuthApi";
+// import { useContactQuery } from "../../features/ContactApi"
+
 const Navbar = () => {
   const [userLogout] = useUserLogoutMutation();
   const navigate = useNavigate();
