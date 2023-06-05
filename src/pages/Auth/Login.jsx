@@ -2,27 +2,32 @@ import React, { useState } from "react";
 // import loginIamge from "../assets/login.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
+import { useLoginMutation } from "../../features/ContactApi"
+import { addUser } from "../../features/authSlice"
+import { useDispatch } from "react-redux"
 // import { useLoginMutation } from "../features/api/AuthApi";
 // import { useDispatch } from "react-redux";
 // import { addUser } from "../features/services/AuthSlice";
 
 const Login = () => {
-  // const [login] = useLoginMutation();
+  const [login] = useLoginMutation();
   const [email, setEmail] = useState("james2000@gmail.com");
   const [password, setPassword] = useState("password");
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  //  const [email, setEmail] = useState("admin@gmail.com");
+  // const [password, setPassword] = useState("admin123");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const user = { email, password };
-  // const loginHandler = async (user) => {
-  //   const data = await login(user);
-  //   console.log(data);
-  //   if (data?.success) {
-  //     dispatch(addUser({ user: data?.user, token: data?.token }));
-  //     console.log(data?.message);
-  //     navigate("/");
-  //   }
-  // };
+  const user = { email, password };
+  const loginHandler = async (user) => {
+    const data = await login(user);
+    console.log(data);
+    dispatch(addUser({user:data?.user,token:data?.token}))
+    console.log(data?.message);
+    if (data?.success) {
+      navigate("/");
+    }
+  };
   return (
     <div>
       <div className="flex items-center justify-center gap-10 bg-white h-screen p-5 px-20 w-full">

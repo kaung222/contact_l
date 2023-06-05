@@ -1,4 +1,10 @@
+import { useContactQuery } from "../../features/ContactApi"
+
 const Navbar = () => {
+  const token = localStorage.getItem("token")
+  console.log(token)
+  const {data} = useContactQuery({token})
+  console.log(data)
   return (
     <>
       <div className=" bg-[#3559e6] flex w-full justify-between items-center gap-4 text-sm md:text-base text-white px-5 shadow-lg">
