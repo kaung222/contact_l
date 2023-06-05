@@ -7,7 +7,7 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { useUserLoginMutation } from "../../features/api/AuthApi";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [userLogin] = useUserLoginMutation();
@@ -24,16 +24,16 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data?.user));
       navigate("/");
     } else {
-      toast.error("Something went wrong!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast.error("Something went wrong!", {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     }
   };
   return (
@@ -133,7 +133,7 @@ const Login = () => {
 
         {/* right side end  */}
         {/* React Toast  */}
-        <ToastContainer
+        {/* <ToastContainer
           position="top-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -145,8 +145,8 @@ const Login = () => {
           pauseOnHover
           theme="light"
         />
-        {/* Same as */}
-        <ToastContainer />
+       
+        <ToastContainer /> */}
       </div>
     </div>
   );

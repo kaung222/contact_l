@@ -1,19 +1,15 @@
 import { AiFillPrinter } from "react-icons/ai";
 import { BiDotsVerticalRounded, BiExport, BiImport } from "react-icons/bi";
 import { useGetContactsQuery } from "../../features/api/ContactApi";
-import { useState } from "react";
-import { BsHeart, BsPencil, BsThreeDotsVertical } from "react-icons/bs";
+import Table from "./Table";
 
 const Content = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const response = useGetContactsQuery(token);
-  const [showActions, setShowActions] = useState(false);
   const contacts = response?.data?.contacts.data;
   console.log(contacts);
-  // mouse hover function
-  const hoverHandler = (id) => {
-    console.log(id);
-  };
+
+  // const checkedItem =
   return (
     <>
       <div className="w-full">
@@ -47,28 +43,7 @@ const Content = () => {
           ) : (
             <tbody>
               {contacts?.map((contact) => {
-                return (
-                  <tr
-                    key={contact.id}
-                    className="hover-item h-10 hover:bg-slate-100"
-                    // onMouseOver={() => hoverHandler(contact.id)}
-                  >
-                    <td className="text-center pt-5 flex items-center gap-2 text-sm">
-                      <h1 className="w-7 h-7 hover-invisible bg-blue-200 pt-1 rounded-full">
-                        {contact.name.substring(0, 1)}
-                      </h1>
-                      <input type="checkbox" className="hidden w-5 h-5 check-item hover-visible" />
-                      <h2 className="text-center ">{contact.name}</h2>
-                    </td>
-                    <td className="text-center text-sm">{contact.email}</td>
-                    <td className="text-center text-sm">{contact.phone}</td>
-                    <td className=" hidden hover-visible mx-3">
-                      <button className=" mx-3"><BsHeart /></button>
-                      <button className=" mx-3"><BsPencil /></button>
-                      <button className=" mx-3"><BsThreeDotsVertical /></button>
-                    </td>
-                  </tr>
-                );
+                return <Table contact={contact} contacts={contacts} key={contact.id}/>;
               })}
             </tbody>
           )}
