@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Guard from "./components/Guard";
 import Frequent from "./pages/Frequent";
 import Content from "./components/Dashboard/Content";
+import Detail from "./components/Detail";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Content />} />
+        <Route path="/detail/:id" element={<Detail/>}/>
       </Routes>
     </>
   );

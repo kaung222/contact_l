@@ -5,17 +5,10 @@ import LeftSidebar from "../Dashboard/LeftSidebar";
 const Layout = () => {
   return (
     <>
-      {/* <Navbar /> */}
-      <div className="container">
-        <div className="row flex justify-center w-screen">
-          <div className="col">
-            <LeftSidebar />
-          </div>
-          <div className="col">
-            <Content />
-          </div>
-        </div>
-      </div>
+    <div className="flex w-full mt-20">
+      <LeftSidebar/>
+      <Content/>
+    </div>
     </>
   );
 };
