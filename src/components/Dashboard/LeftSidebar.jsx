@@ -9,10 +9,10 @@ import { NavLink } from "react-router-dom"
 
 const LeftSidebar = () => {
   return (
-    <div className=" w-[300px] text-sm shadow-lg py-3 pb-16 hidden sm:block text-black h-screen fixed">
+    <div className=" hidden w-[300px] text-sm shadow-lg py-3 pb-16 lg:block text-black h-screen fixed">
       <div className="">
         <ul className="flex-col flex pt-10">
-          <NavLink to={"/contact"}>
+          <NavLink to={"/"}>
             <li className=" text-sm hover:bg-stone-300 p-3 rounded-md">
               <div className=" flex gap-5 items-center">
                 <RiContactsLine />
