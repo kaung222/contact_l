@@ -20,11 +20,11 @@ const LeftSidebar = () => {
                       </div>
                     </li>
                 </NavLink>
-                <NavLink to={'/frequent'}>
+                <NavLink to={'/create'}>
                     <li className=' text-xl hover:bg-stone-300 p-2 rounded-md' >
                         <div className=" flex gap-5 items-center">
                             <RxCounterClockwiseClock />
-                            <h1>Other Contacts</h1>
+                            <h1>Create Contacts</h1>
                         </div>
                     </li>
                 </NavLink>

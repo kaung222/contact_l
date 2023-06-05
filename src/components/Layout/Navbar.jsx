@@ -2,6 +2,7 @@ import { useContactQuery } from "../../features/ContactApi"
 
 const Navbar = () => {
   const token = localStorage.getItem("token")
+
   console.log(token)
   const {data} = useContactQuery({token})
   console.log(data)

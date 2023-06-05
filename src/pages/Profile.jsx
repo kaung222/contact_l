@@ -1,11 +1,11 @@
 // import React from 'react'
 
-const Content = () => {
+const Profile = () => {
   return (
     <div>
-      aaa
+      Hello 
     </div>
   )
 }
 
-export default Content
+export default Profile
