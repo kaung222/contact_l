@@ -3,7 +3,7 @@ import {FcMenu} from "react-icons/fc"
 const Navbar = () => {
   return (
     <>
-      <div className=" flex w-full justify-between items-center gap-4 text-sm md:text-base  px-5 shadow-lg sticky top-0 z-10 bg-white">
+      <div className=" flex w-full justify-between items-center gap-4 text-sm md:text-base  px-5 py-2  fixed top-0 z-10 bg-white">
         <div className="flex items-center justify-center gap-2 md:gap-5 my-5">
           <button className="menu text-2xl">
             <FcMenu/>
