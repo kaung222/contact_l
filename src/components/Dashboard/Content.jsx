@@ -2,23 +2,27 @@ import { Table } from "@mantine/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetContactQuery } from "../../features/api/ContactApi";
-import { addContacts } from "../../features/services/ContactSlice";
+import { useGetContactQuery } from "../../features/api/ContactApi"
+import { addContacts } from "../../features/services/ContactSlice"
+import { useSearchByNameQuery } from "../../features/api/ContactApi"
+
 
 const Content = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token")
   const { data } = useGetContactQuery(token);
-  console.log(data?.contacts.data);
   const contacts = useSelector((state) => state.ContactSlice.contacts);
+  const search = useSelector((state) => state?.ContactSlice.search)
+  const page = 1;
+  const searchContent = useSearchByNameQuery({token,search,page})
   const dispatch = useDispatch();
-  console.log(contacts);
   useEffect(() => {
     dispatch(addContacts(data?.contacts.data));
   }, [data, dispatch]);
-
+  const newContact = search === '' ? contacts : searchContent?.data?.contacts?.data;
+  console.log(newContact)
   return (
     <>
-      <div className="w-full ml-[280px]">
+      <div className="w-full">
         <Table horizontalSpacing="xl">
           <thead className="fixed w-[1180px]">
             <tr className=" flex justify-around items-center  py-4 px-1 text-center bg-white ">
@@ -29,7 +33,7 @@ const Content = () => {
             </tr>
           </thead>
           <tbody className="">
-            {contacts?.map((contact,index) => {
+            {newContact.map((contact,index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
                 <Link to={`/detail/${contact?.id}`} state={contact}>

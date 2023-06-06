@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsGear, BsSearch } from "react-icons/bs";
 import { FcMenu } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { FiLogOut, FiUserPlus } from "react-icons/fi";
-import { useUserLogoutMutation } from "../../features/api/AuthApi";
-// import { useContactQuery } from "../../features/ContactApi"
+import { useDispatch, useSelector } from "react-redux"
+// import { addContacts } from "../../features/services/ContactSlice"
+import { searchName } from "../../features/services/ContactSlice"
 
 const Navbar = () => {
-  const [userLogout] = useUserLogoutMutation();
-  const navigate = useNavigate();
-  const token = JSON.parse(localStorage.getItem("token"));
-  const logoutHandler = async (token) => {
-    const response = await userLogout(token);
-    if (response?.data?.success) {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      navigate("/login");
-    } else {
-      console.log(response.error.data);
-    }
-  };
   const [showProfile, setShowProfile] = useState(false);
-  console.log(showProfile);
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.ContactSlice.contacts)
+  const search = useSelector((state) => state.ContactSlice.search)
+console.log(search)
+  const [searchParams,setSearchParams] = useSearchParams();
+  console.log(searchParams.get("q"))
+
+  // const filtered = contacts?.filter(contact => contact?.name?.toLowerCase().includes(search.toLowerCase()))
+
   return (
     <>
       <div className=" flex w-full justify-between items-center gap-4 text-sm md:text-base  px-5 py-2  fixed top-0 z-10 bg-white">
@@ -45,6 +41,11 @@ const Navbar = () => {
             <BsSearch />
           </button>
           <input
+            value={search}
+            onChange={(e) => {
+              dispatch(searchName(e.target.value))
+              setSearchParams(`?q=${e.target.value}&page=1`);
+            } }
             type="text"
             name="search"
             className=" outline-none px-1 md:px-3 md:py-1 py-0 md:w-[400px] text-slate-800 w-full bg-slate-50 "
@@ -83,7 +84,7 @@ const Navbar = () => {
               </Link>
               <p
                 className="p-2 flex items-center gap-2 hover:bg-slate-300 rounded-lg w-full"
-                onClick={() => logoutHandler(token)}
+                // onClick={() =>}
               >
                 <FiLogOut />
                 <span>Logout</span>

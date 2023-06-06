@@ -1,7 +1,7 @@
 // import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
-import LeftSidebar from '../Dashboard/LeftSidebar'
+import LeftSidebar from './LeftSidebar'
 
 const RootLayout = () => {
   return (

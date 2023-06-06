@@ -1,14 +1,14 @@
 // import Content from "../components/Dashboard/Content";
 // import LeftSidebar from "../components/Dashboard/LeftSidebar";
 import { Loader } from "@mantine/core";
-import Layout from "../components/Layout/Layout";
-import Navbar from "../components/Layout/Navbar";
 import { useGetContactQuery } from "../features/api/ContactApi";
+import Content from "../components/Dashboard/Content"
+// import Content from "../components/Dashboard/Content"
 
 
 
 const Dashboard = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token")
   const { isLoading } = useGetContactQuery(token);
 
   if (isLoading) {
@@ -20,11 +20,8 @@ const Dashboard = () => {
   }
   return (
     <>
-      <Navbar />
-      <div className="flex w-full">
-        {/* <LeftSidebar />
-         <Content/> */}
-         <Layout/>
+      <div className="">
+          <Content />
       </div>
     </>
   );

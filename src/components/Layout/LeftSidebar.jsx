@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom"
 
 const LeftSidebar = () => {
   return (
-    <div className=" w-[300px] text-sm shadow-lg py-3 pb-16 hidden sm:block text-black h-screen fixed">
+    <div className=" w-[300px] text-sm shadow-lg py-3 pb-16 hidden sm:block text-black h-screen">
       <div className="">
         <ul className="flex-col flex pt-10">
           <NavLink to={"/contact"}>

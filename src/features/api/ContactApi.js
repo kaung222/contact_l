@@ -23,7 +23,14 @@ export const ContactApi = createApi({
       }),
       invalidatesTags: ["contact"],
     }),
+    searchByName: builder.query({
+      query: ({ token, search, page }) => ({
+        url: `contact?keyword=${search}&page=${page}`,
+        headers: { authorization: ` Bearer ${token}` },
+      }),
+      providesTags: ["contactApiPath"],
+    }),
   }),
 });
 
-export const {useCreateContactMutation ,useGetContactQuery} = ContactApi;
+export const {useCreateContactMutation ,useGetContactQuery,useSearchByNameQuery} = ContactApi;

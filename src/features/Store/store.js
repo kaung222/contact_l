@@ -14,19 +14,20 @@
 // });
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-
-import { authApi } from "../api/AuthApi";
-import { contactApi } from "../api/ContactApi";
-import contactSlice from "../services/ContactSlice";
+import { AuthApi } from "../api/AuthApi"
+import { ContactApi } from "../api/ContactApi"
+import authSlice from "../services/authSlice"
+import ContactSlice from "../services/ContactSlice"
 
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [contactApi.reducerPath]: contactApi.reducer,
-    ContactSlice: contactSlice.reducer,
+    [AuthApi.reducerPath]: AuthApi.reducer,
+    [ContactApi.reducerPath]: ContactApi.reducer,
+    ContactSlice: ContactSlice,
+    authslice : authSlice
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, contactApi.middleware),
+    getDefaultMiddleware().concat(AuthApi.middleware, ContactApi.middleware),
 });
 
 // Set up listeners for automatic cache invalidation and background polling
