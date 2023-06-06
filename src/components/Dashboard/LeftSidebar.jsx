@@ -4,13 +4,20 @@ import {RxCounterClockwiseClock} from 'react-icons/rx'
 import {BsArrowDownSquare,BsPlusLg} from 'react-icons/bs'
 import {MdOutlineModeEditOutline} from 'react-icons/md'
 import {BiTrash} from 'react-icons/bi'
+import { AiOutlinePlus } from "react-icons/ai";
 
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const LeftSidebar = () => {
   return (
     <div className=" w-[300px] text-sm shadow-lg py-3 pb-16 hidden sm:block text-black h-screen fixed">
       <div className="">
+        <Link to={'/create'}>
+          <button className="flex gap-3 ml-4 text-xl items-center border rounded-full px-4 py-1 bg-blue-400 text-white shadow-xl hover:bg-blue-900">
+            <AiOutlinePlus className=" text-3xl" />
+            Create Contact
+          </button>
+        </Link>
         <ul className="flex-col flex pt-10">
           <NavLink to={"/contact"}>
             <li className=" text-sm hover:bg-stone-300 p-3 rounded-md">

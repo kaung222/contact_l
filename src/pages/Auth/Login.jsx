@@ -51,9 +51,9 @@ const Login = () => {
       <form
         onSubmit={form.onSubmit(async (values) => {
           const { data } = await userLogin(values);
-          dispatch(addUser({ user: data?.user, token: data?.token }));
           console.log(data);
           if (data?.success) {
+            dispatch(addUser({ user: data?.user, token: data?.token }));
             navigate("/");
           }
           //   try {

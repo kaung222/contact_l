@@ -14,10 +14,9 @@ const Detail = () => {
       <div className="flex">
         <LeftSidebar />
         <div className="flex justify-start mt-[150px] ml-[300px] px-20 flex-col w-full items-start h-full">
-          <Link to='/'>
+          <Link to="/">
             <BsArrowLeft />
           </Link>
-
           <div className="flex gap-10 items-center my-5">
             <img
               src="https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"

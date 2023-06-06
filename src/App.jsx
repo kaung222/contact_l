@@ -8,6 +8,8 @@ import Guard from "./components/Guard";
 import Frequent from "./pages/Frequent";
 import Content from "./components/Dashboard/Content";
 import Detail from "./components/Detail";
+import CreateContent from "./pages/CreateContent";
+import Edit from "./pages/Edit";
 
 const App = () => {
   return (
@@ -32,7 +34,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Content />} />
-        <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/create" element={<CreateContent />} />
+        <Route path="/edit" element={<Edit />} />
       </Routes>
     </>
   );

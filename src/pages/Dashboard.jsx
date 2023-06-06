@@ -22,8 +22,6 @@ const Dashboard = () => {
     <>
       <Navbar />
       <div className="flex w-full">
-        {/* <LeftSidebar />
-         <Content/> */}
          <Layout/>
       </div>
     </>

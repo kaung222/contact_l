@@ -7,6 +7,7 @@ import { addContacts } from "../../features/services/ContactSlice";
 
 const Content = () => {
   const token = JSON.parse(localStorage.getItem("token"));
+  console.log(token);
   const { data } = useGetContactQuery(token);
   console.log(data?.contacts.data);
   const contacts = useSelector((state) => state.ContactSlice.contacts);
@@ -35,7 +36,7 @@ const Content = () => {
                 <Link to={`/detail/${contact?.id}`} state={contact}>
                   <tr
                     key={contact?.id}
-                    className={`flex justify-around items-center border py-8 ${index === 0 && "mt-10"} shadow hover:bg-slate-100`}
+                    className={`flex justify-around items-center border py-4 ${index === 0 && "mt-10"} shadow hover:bg-slate-100`}
                   >
                     <td>{contact?.name}</td>
                     <td colSpan={2}>{contact?.email}</td>
