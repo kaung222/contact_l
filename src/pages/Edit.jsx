@@ -3,34 +3,41 @@ import { BsArrowLeft } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import LeftSidebar from "../components/Dashboard/LeftSidebar";
 import Navbar from "../components/Layout/Navbar";
-import { useEditContactMutation, useSingleGetContactQuery } from "../features/api/ContactApi";
+import {
+  useEditContactMutation,
+  useSingleGetContactQuery,
+} from "../features/api/ContactApi";
 
 const Edit = () => {
- const {id} = useParams();
- const { data: contact } = useSingleGetContactQuery(id);
- console.log(contact);
- const [name, setName] = useState(contact?.name)
- const [phone, setPhone] = useState(contact?.phone);
- const [email, setEmail] = useState(contact?.email);
- const [address, setAddress] = useState(contact?.address);
+  const token = JSON.parse(localStorage.getItem("token"));
+  const { id } = useParams();
+  const { data } = useSingleGetContactQuery({ id, token });
+  const contacts = data?.contact;
 
- const nav = useNavigate()
+  const [name, setName] = useState(contacts?.name);
+  const [phone, setPhone] = useState(contacts?.phone);
+  const [email, setEmail] = useState(contacts?.email);
+  const [address, setAddress] = useState(contacts?.address);
 
- const [editContact] = useEditContactMutation();
 
- useEffect(()=>{
-  setName(contact?.name)
-  setPhone(contact?.phone);
-  setEmail(contact?.email);
-  setAddress(contact?.address);
- },[])
 
- const editContactHandler = (e) => {
-  e.preventDefault();
-  const newData = {id, name, phone, email, address}
-  editContact(newData)
-  nav('/')
- }
+  const nav = useNavigate();
+
+  const [editContact] = useEditContactMutation();
+
+  useEffect(() => {
+    setName(contacts?.name)
+    setPhone(contacts?.phone)
+    setEmail(contacts?.email)
+    setAddress(contacts?.address)
+  }, []);
+
+  const editContactHandler = (e) => {
+    e.preventDefault();
+    const newData = { id, name, phone, email, address};
+    editContact(newData);
+    nav("/");
+  };
   return (
     <>
       <Navbar />
@@ -71,6 +78,7 @@ const Edit = () => {
                     placeholder="Edit your name"
                     className="  px-4 py-1 rounded"
                     value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className=" flex flex-col gap-2">
@@ -82,6 +90,7 @@ const Edit = () => {
                     placeholder="Edit your number"
                     className="  px-4 py-1 rounded"
                     value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </div>
@@ -95,6 +104,7 @@ const Edit = () => {
                     placeholder="Edit your email"
                     className=" px-4 py-1 rounded"
                     value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className=" flex flex-col gap-2">
@@ -106,6 +116,7 @@ const Edit = () => {
                     placeholder="Edit your address"
                     className=" px-4 py-1 rounded"
                     value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
               </div>

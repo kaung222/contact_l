@@ -9,6 +9,7 @@ const Detail = () => {
 
   console.log(location.state);
   const contact = location.state;
+  console.log(contact?.id);
   return (
     <div>
       <Navbar />
@@ -18,7 +19,7 @@ const Detail = () => {
           <Link to="/">
             <BsArrowLeft />
           </Link>
-          <Link to={"/edit"}>
+          <Link to={`/edit/${contact?.id}`}>
             <button>Edit</button>
           </Link>
           <div className="flex gap-10 items-center my-5">

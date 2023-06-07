@@ -24,7 +24,7 @@ export const ContactApi = createApi({
       invalidatesTags: ["contact"],
     }),
     editContact: builder.mutation({
-      query: (id, data, token) => ({
+      query: ( {data, token}) => ({
         url: `contact/${data?.id}`,
         method: "PUT",
         body: data,
@@ -33,9 +33,11 @@ export const ContactApi = createApi({
       invalidatesTags: ["contact"],
     }),
     singleGetContact: builder.query({
-      query: (id) => `/contact/${id}`,
-      method: 'GET',
-      providesTags: ["contact"]
+      query: ({ id, token }) => ({
+        url: `/contact/${id}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ['contact']
     }),
   }),
 });
