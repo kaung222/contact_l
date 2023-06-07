@@ -11,7 +11,7 @@ const Navbar = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const logoutHandler = async (token) => {
     const response = await userLogout(token);
-    console.log(response);
+    // console.log(response);
     if (response?.data?.success) {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
@@ -21,7 +21,7 @@ const Navbar = () => {
     }
   };
   const [showProfile, setShowProfile] = useState(false);
-  console.log(showProfile);
+  // console.log(showProfile);
   return (
     <>
       <div className=" flex w-full justify-between items-center gap-4 text-sm md:text-base  px-5 py-2  fixed top-0 z-10 bg-white">

@@ -10,11 +10,11 @@ export const AuthSlice = createSlice({
   initialState,
   reducers:{
     addUser: (state, {payload}) =>{
-        state.user = payload.user,
-        state.token = payload.token,
-        localStorage.setItem("user", JSON.stringify(state.user)),
-        localStorage.setItem("token", state.token)
-        console.log(state.token);
+        state.user = payload.user 
+         state.token = payload.token
+        localStorage.setItem("user", JSON.stringify(state.user))
+        localStorage.setItem("token", JSON.stringify(state.token));
+        console.log(state.token)
     }
   }
 });

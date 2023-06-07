@@ -1,6 +1,6 @@
 import { FileInput, TextInput } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LeftSidebar from "../components/Dashboard/LeftSidebar";
 import Navbar from "../components/Layout/Navbar";
 import { useCreateContactMutation } from "../features/api/ContactApi";
@@ -8,9 +8,9 @@ import { BsArrowLeft } from "react-icons/bs";
 
 const CreateContent = () => {
   const token = JSON.parse(localStorage.getItem("token"));
-  console.log(token);
   const [createContact] = useCreateContactMutation();
-//   const nav = useNavigate();
+  const nav = useNavigate();
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -29,35 +29,33 @@ const CreateContent = () => {
     },
   });
 
-//   const handleSubmit = async ( contact) => {
-//     try {
-//       const { data } = await createContact({ contact, token });
-//       if (data?.success) {
-//         nav("/");
-//       }
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
   return (
     <div>
       <Navbar />
       <div className="flex w-full mt-20">
         <LeftSidebar />
 
-        <div className="flex justify-center mt-[150px] ml-[300px] px-20 flex-col w-full items-center h-full">
+        <div className="flex justify-center mt-4 ml-[300px] px-20 flex-col w-full items-center h-full">
           <form
             onSubmit={form.onSubmit(async (values) => {
-              const { contact } = await createContact({
+              const { data } = await createContact({
                 token,
-                contact: values,
+                data: values,
               });
-              if (contact?.success) console.log(contact?.success);
+              if (data?.success){
+                nav("/");
+              }
+                console.log(data);
+
             })}
             className="flex flex-col gap-5"
           >
+            <Link to="/">
+              <div className=" font-bold text-lg flex gap-2 items-center mt-5">
+                <BsArrowLeft />
+                Back
+              </div>
+            </Link>
             <h2 className="text-lg mx-auto font-bold my-5">Create Contact</h2>
             <FileInput
               placeholder="Choose"
@@ -71,7 +69,7 @@ const CreateContent = () => {
             />
 
             <hr />
-            <div className=" border px-4 py-2 bg-slate-50">
+            <div className=" border px-6 py-3 bg-slate-50 flex flex-col gap-10">
               <div className="flex gap-5">
                 <TextInput
                   placeholder="Enter name"
@@ -109,12 +107,6 @@ const CreateContent = () => {
                 </button>
               </div>
             </div>
-            <Link to="/">
-              <div className=" font-bold text-lg flex gap-2 items-center mt-5">
-                <BsArrowLeft />
-                Back
-              </div>
-            </Link>
           </form>
         </div>
       </div>

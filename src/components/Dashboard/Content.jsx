@@ -9,7 +9,7 @@ const Content = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   console.log(token);
   const { data } = useGetContactQuery(token);
-  console.log(data?.contacts.data);
+  // console.log(data?.contacts.data);
   const contacts = useSelector((state) => state.ContactSlice.contacts);
   const dispatch = useDispatch();
   console.log(contacts);
