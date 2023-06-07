@@ -41,7 +41,7 @@ const Content = () => {
                     <td>{contact?.name}</td>
                     <td colSpan={2}>{contact?.email}</td>
                     <td>{contact?.phone}</td>
-                    <td>{contact?.address.substring(0, 10)}...</td>
+                    <td>{contact?.address}...</td>
                   </tr>
                  </Link>
               );

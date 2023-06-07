@@ -7,7 +7,8 @@ import { useEditContactMutation, useSingleGetContactQuery } from "../features/ap
 
 const Edit = () => {
  const {id} = useParams();
- const {data : contact} = useSingleGetContactQuery(id);
+ const { data: contact } = useSingleGetContactQuery(id);
+ console.log(contact);
  const [name, setName] = useState(contact?.name)
  const [phone, setPhone] = useState(contact?.phone);
  const [email, setEmail] = useState(contact?.email);

@@ -6,6 +6,7 @@ import LeftSidebar from "./Dashboard/LeftSidebar";
 
 const Detail = () => {
   const location = useLocation();
+
   console.log(location.state);
   const contact = location.state;
   return (
@@ -16,6 +17,9 @@ const Detail = () => {
         <div className="flex justify-start mt-[150px] ml-[300px] px-20 flex-col w-full items-start h-full">
           <Link to="/">
             <BsArrowLeft />
+          </Link>
+          <Link to={"/edit"}>
+            <button>Edit</button>
           </Link>
           <div className="flex gap-10 items-center my-5">
             <img

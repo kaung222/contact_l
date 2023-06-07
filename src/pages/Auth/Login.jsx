@@ -19,7 +19,6 @@ const Login = () => {
   // const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const dispatch = useDispatch();
-  
 
   const form = useForm({
     initialValues: {
@@ -34,33 +33,21 @@ const Login = () => {
     },
   });
 
-
-  // const user = { email, password };
-  // const loginHandler = async (user) => {
-  //   const { data } = await userLogin(user);
-  //   dispatch(addUser({user: data?.user, token: data?.token}))
-  //   console.log(data)
-  //   if (data?.success) {
-  //     // localStorage.setItem("token", JSON.stringify(data?.token));
-  //     // localStorage.setItem("user", JSON.stringify(data?.user));
-  //     navigate("/");
-  //   }
-  // };
   return (
     <div>
       <form
         onSubmit={form.onSubmit(async (values) => {
           const { data } = await userLogin(values);
           console.log(data);
-          if (data?.success) {
-            dispatch(addUser({ user: data?.user, token: data?.token }));
-            navigate("/");
-          }
-          //   try {
 
-          //   } catch (error) {
-          //     console.log(error);
-          //   }
+          try {
+            if (data?.success) {
+              dispatch(addUser({ user: data?.user, token: data?.token }));
+              navigate("/");
+            }
+          } catch (error) {
+            console.log(error);
+          }
         })}
         className="flex items-center justify-center gap-10 bg-white h-screen md:p-5 md:px-10 w-full"
       >

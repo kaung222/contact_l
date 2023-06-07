@@ -11,8 +11,8 @@ export const ContactApi = createApi({
         url: "/contact",
         headers: { authorization: `Bearer ${token}` },
         // body: user,
+        providesTags: ["contact"],
       }),
-      providesTags: ["contact"],
     }),
     createContact: builder.mutation({
       query: ({ data, token }) => ({
@@ -34,7 +34,8 @@ export const ContactApi = createApi({
     }),
     singleGetContact: builder.query({
       query: (id) => `/contact/${id}`,
-      providesTags: ["contact"],
+      method: 'GET',
+      providesTags: ["contact"]
     }),
   }),
 });
