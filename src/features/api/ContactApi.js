@@ -32,7 +32,16 @@ export const ContactApi = createApi({
       }),
       invalidatesTags: ["contact"],
     }),
+    singleGetContact: builder.query({
+      query: (id) => `/contact/${id}`,
+      providesTags: ["contact"],
+    }),
   }),
 });
 
-export const {useCreateContactMutation ,useGetContactQuery, useEditContactMutation } = ContactApi;
+export const {
+  useCreateContactMutation,
+  useGetContactQuery,
+  useEditContactMutation,
+  useSingleGetContactQuery
+} = ContactApi;

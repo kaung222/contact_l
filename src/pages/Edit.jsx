@@ -1,15 +1,35 @@
-import { FileInput, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import LeftSidebar from "../components/Dashboard/LeftSidebar";
 import Navbar from "../components/Layout/Navbar";
-import { useEditContactMutation } from "../features/api/ContactApi";
+import { useEditContactMutation, useSingleGetContactQuery } from "../features/api/ContactApi";
 
 const Edit = () => {
-  const token = JSON.parse(localStorage.getItem("token"))
-  console.log(token);
-  const [editContact] = useEditContactMutation();
+ const {id} = useParams();
+ const {data : contact} = useSingleGetContactQuery(id);
+ const [name, setName] = useState(contact?.name)
+ const [phone, setPhone] = useState(contact?.phone);
+ const [email, setEmail] = useState(contact?.email);
+ const [address, setAddress] = useState(contact?.address);
+
+ const nav = useNavigate()
+
+ const [editContact] = useEditContactMutation();
+
+ useEffect(()=>{
+  setName(contact?.name)
+  setPhone(contact?.phone);
+  setEmail(contact?.email);
+  setAddress(contact?.address);
+ },[])
+
+ const editContactHandler = (e) => {
+  e.preventDefault();
+  const newData = {id, name, phone, email, address}
+  editContact(newData)
+  nav('/')
+ }
   return (
     <>
       <Navbar />
@@ -17,7 +37,7 @@ const Edit = () => {
         <LeftSidebar />
 
         <div className="flex justify-center mt-4 ml-[300px] px-20 flex-col w-full items-center h-full">
-          <form className="flex flex-col gap-5">
+          <form className="flex flex-col gap-5" onSubmit={editContactHandler}>
             <Link to="/">
               <div className=" font-bold text-lg flex gap-2 items-center mt-5">
                 <BsArrowLeft />
@@ -49,6 +69,7 @@ const Edit = () => {
                     type="text"
                     placeholder="Edit your name"
                     className="  px-4 py-1 rounded"
+                    value={name}
                   />
                 </div>
                 <div className=" flex flex-col gap-2">
@@ -59,6 +80,7 @@ const Edit = () => {
                     type="text"
                     placeholder="Edit your number"
                     className="  px-4 py-1 rounded"
+                    value={phone}
                   />
                 </div>
               </div>
@@ -71,6 +93,7 @@ const Edit = () => {
                     type="text"
                     placeholder="Edit your email"
                     className=" px-4 py-1 rounded"
+                    value={email}
                   />
                 </div>
                 <div className=" flex flex-col gap-2">
@@ -81,6 +104,7 @@ const Edit = () => {
                     type="text"
                     placeholder="Edit your address"
                     className=" px-4 py-1 rounded"
+                    value={address}
                   />
                 </div>
               </div>
